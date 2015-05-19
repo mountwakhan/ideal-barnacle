@@ -2,7 +2,7 @@
 
 Inspired by [SinonJS](http://sinonjs.org/) and [Decorators & metadata reflection in TypeScript: From Novice to Expert](http://blog.wolksoftware.com/decorators-reflection-javascript-typescript)
 
-## Lights!
+## Code
 ```
 class Calculator {
   public sume(a : number, b : number) : number {
@@ -13,7 +13,7 @@ class Calculator {
   }
 }
 ```
-## Camera!
+## Spy
 
 ```
 import spy = require("spy-decorator");
@@ -30,7 +30,7 @@ class CalculatorSpy extends Calculator {
   }
 }
 ```
-## Action!
+## Test
 ```
 var calculator = new CalculatorSpy();
 
