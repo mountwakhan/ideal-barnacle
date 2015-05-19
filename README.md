@@ -47,8 +47,8 @@ console.log(calculatorSpy.spies.sume.calledThrice()); // false
 console.log(calculatorSpy.spies.sume.callCount());    // 2
 console.log(calculatorSpy.spies.sume.threw());        // false
 
-console.log(calculatorSpy.spies.sume.calls);                   // see image bellow
-console.log(calculatorSpy.spies.sume.firstCall());             // calculatorSpy.spies.multiply.calls[0]
+console.log(calculatorSpy.spies.sume.calls); // see image bellow
+console.log(calculatorSpy.spies.sume.firstCall()); // calculatorSpy.spies.multiply.calls[0]
 console.log(calculatorSpy.spies.sume.firstCall().returnValue); // 5
 
 // multiply spy
@@ -63,8 +63,8 @@ console.log(calculatorSpy.spies.multiply.calledThrice()); // false
 console.log(calculatorSpy.spies.multiply.callCount());    // 2
 console.log(calculatorSpy.spies.multiply.threw());        // false
 
-console.log(calculatorSpy.spies.multiply.calls);                   // see image bellow
-console.log(calculatorSpy.spies.multiply.firstCall());             // calculatorSpy.spies.multiply.calls[0]
+console.log(calculatorSpy.spies.multiply.calls); // see image bellow
+console.log(calculatorSpy.spies.multiply.firstCall()); // calculatorSpy.spies.multiply.calls[0]
 console.log(calculatorSpy.spies.multiply.firstCall().returnValue); // 6
 ```
 ![multiply calls](https://upload.wikimedia.org/wikipedia/commons/a/a3/Multiply_calls.png)
