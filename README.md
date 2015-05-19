@@ -3,7 +3,7 @@
 ## @spy is a open-source TypeScript decorator which allows developers to spy method calls during the software testing process. 
 
 ## What is a spy?
-A spy is a function that records some details like about a function when it is invoked. Some of the details recored include:
+A spy is a function that records some details  about a function when it is invoked. Some of these details recored include:
 
 - Arguments.
 - Return value.
