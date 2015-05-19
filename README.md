@@ -40,32 +40,21 @@ var calculatorSpy = new CalculatorSpy();
 calculatorSpy.sume(2, 3);
 calculatorSpy.sume(5, 5);
 
-console.log(calculatorSpy.spies.sume.called());       // true
-console.log(calculatorSpy.spies.sume.calledOnce());   // false
-console.log(calculatorSpy.spies.sume.calledTwice());  // true
-console.log(calculatorSpy.spies.sume.calledThrice()); // false
-console.log(calculatorSpy.spies.sume.callCount());    // 2
-console.log(calculatorSpy.spies.sume.threw());        // false
+console.log(calculatorSpy.spies.sume.called());         // true
+console.log(calculatorSpy.spies.sume.calledOnce());     // false
+console.log(calculatorSpy.spies.multiply.called());     // true
+console.log(calculatorSpy.spies.multiply.calledOnce()); // false
+console.log(calculatorSpy.spies.sume.calledTwice());    // true
+console.log(calculatorSpy.spies.sume.calledThrice());   // false
+console.log(calculatorSpy.spies.sume.callCount());      // 2
+console.log(calculatorSpy.spies.sume.threw());          // false
 
-console.log(calculatorSpy.spies.sume.calls); // see image bellow
-console.log(calculatorSpy.spies.sume.firstCall()); // calculatorSpy.spies.multiply.calls[0]
-console.log(calculatorSpy.spies.sume.firstCall().returnValue); // 5
-
-// multiply spy
-
-calculatorSpy.multiply(2, 3);
-calculatorSpy.multiply(5, 5);
-
-console.log(calculatorSpy.spies.multiply.called());       // true
-console.log(calculatorSpy.spies.multiply.calledOnce());   // false
-console.log(calculatorSpy.spies.multiply.calledTwice());  // true
-console.log(calculatorSpy.spies.multiply.calledThrice()); // false
-console.log(calculatorSpy.spies.multiply.callCount());    // 2
-console.log(calculatorSpy.spies.multiply.threw());        // false
-
-console.log(calculatorSpy.spies.multiply.calls); // see image bellow
-console.log(calculatorSpy.spies.multiply.firstCall()); // calculatorSpy.spies.multiply.calls[0]
+console.log(calculatorSpy.spies.sume.calls);                       // see image bellow
+console.log(calculatorSpy.spies.sume.firstCall());                 // calls[0]
+console.log(calculatorSpy.spies.sume.firstCall().returnValue);     // 5
 console.log(calculatorSpy.spies.multiply.firstCall().returnValue); // 6
+console.log(calculatorSpy.spies.sume.secondCall().args);           // [5,5]
+console.log(calculatorSpy.spies.multiply.firstCall().args);        // [2,3]
 ```
 ![multiply calls](https://upload.wikimedia.org/wikipedia/commons/a/a3/Multiply_calls.png)
 
