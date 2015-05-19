@@ -39,26 +39,26 @@ var calculator = new CalculatorSpy();
 calculator.sume(2, 3);
 calculator.sume(5, 5);
 
-console.log(calculator.spies.sume.called());                    // true
-console.log(calculator.spies.sume.calledOnce());                // false
-console.log(calculator.spies.sume.calledTwice());               // true
-console.log(calculator.spies.sume.calledThrice());              // false
-console.log(calculator.spies.sume.callCount());                 // 2
-console.log(calculator.spies.sume.threw());                      // false
-console.log(calculator.spies.sume.calls);                       // FunctionCall[] (see image bellow)
-console.log(calculator.spies.sume.firstCall());                 // calls[0] (see image bellow)
-console.log(calculator.spies.sume.firstCall().returnValue);     // 5
-console.log(calculator.spies.sume.secondCall().args);           // [5,5]
+calculator.spies.sume.called();                    // true
+calculator.spies.sume.calledOnce();                // false
+calculator.spies.sume.calledTwice();               // true
+calculator.spies.sume.calledThrice();              // false
+calculator.spies.sume.callCount();                 // 2
+calculator.spies.sume.threw();                      // false
+calculator.spies.sume.calls;                       // FunctionCall[] (see image bellow)
+calculator.spies.sume.firstCall();                 // calls[0] (see image bellow)
+calculator.spies.sume.firstCall().returnValue;     // 5
+calculator.spies.sume.secondCall().args;           // [5,5]
 
 // multiply spy
 
 calculator.multiply(2, 3);
 calculator.multiply(5, 5);
 
-console.log(calculator.spies.multiply.called());                // true
-console.log(calculator.spies.multiply.calledOnce());            // false
-console.log(calculator.spies.multiply.firstCall().args);        // [2,3]
-console.log(calculator.spies.multiply.firstCall().returnValue); // 6
+calculator.spies.multiply.called();                // true
+calculator.spies.multiply.calledOnce();            // false
+calculator.spies.multiply.firstCall().args;        // [2,3]
+calculator.spies.multiply.firstCall().returnValue; // 6
 ```
 ![multiply calls](https://upload.wikimedia.org/wikipedia/commons/a/a3/Multiply_calls.png)
 
