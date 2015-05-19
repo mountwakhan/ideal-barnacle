@@ -45,8 +45,8 @@ console.log(calculator.spies.sume.calledTwice());               // true
 console.log(calculator.spies.sume.calledThrice());              // false
 console.log(calculator.spies.sume.callCount());                 // 2
 console.log(calculator.spies.sume.threw());                      // false
-console.log(calculator.spies.sume.calls);                       // see image bellow
-console.log(calculator.spies.sume.firstCall());                 // calls[0]
+console.log(calculator.spies.sume.calls);                       // FunctionCall[] (see image bellow)
+console.log(calculator.spies.sume.firstCall());                 // calls[0] (see image bellow)
 console.log(calculator.spies.sume.firstCall().returnValue);     // 5
 console.log(calculator.spies.sume.secondCall().args);           // [5,5]
 
