@@ -1,6 +1,6 @@
 # TypeScript @spy decorator
 
-Inspired by [SinonJS](http://sinonjs.org/) and [Decorators & metadata reflection in TypeScript: From Novice to Expert (Part I)](http://blog.wolksoftware.com/decorators-reflection-javascript-typescript)
+Inspired by [SinonJS](http://sinonjs.org/) and [Decorators & metadata reflection in TypeScript: From Novice to Expert](http://blog.wolksoftware.com/decorators-reflection-javascript-typescript)
 
 ## Lights!
 ```
