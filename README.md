@@ -44,7 +44,7 @@ calculator.spies.sume.calledOnce();                // false
 calculator.spies.sume.calledTwice();               // true
 calculator.spies.sume.calledThrice();              // false
 calculator.spies.sume.callCount();                 // 2
-calculator.spies.sume.threw();                      // false
+calculator.spies.sume.threw();                     // false
 calculator.spies.sume.calls;                       // FunctionCall[] (see image bellow)
 calculator.spies.sume.firstCall();                 // calls[0] (see image bellow)
 calculator.spies.sume.firstCall().returnValue;     // 5
