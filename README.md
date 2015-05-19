@@ -68,7 +68,7 @@ Take a look to interfaces to get a sneak peek of what's coming:
 - [FunctionCallInterface](https://github.com/remojansen/typescript-spy-decorator/tree/master/source/function_call.d.ts)
 
 
-## Work in progress - Pull request are wellcome!
+## Work in progress - Pull request are welcome!
 
 There are a good few not implemented methods at:
 - [/source/spy.ts](https://github.com/remojansen/typescript-spy-decorator/tree/master/source/spy.ts)
