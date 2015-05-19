@@ -25,3 +25,11 @@ build/Release
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
+
+# Js / JSON
+*/tsconfig.json
+tsconfig.json
+source/*.js
+source/*.json
+test/*.js
+test/*.json

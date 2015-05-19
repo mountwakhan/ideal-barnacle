@@ -1,0 +1,28 @@
+{
+  "name": "typescript-spy-decorator",
+  "version": "1.0.0",
+  "description": "A @spy typescript decorator that allow to spy method calls for testing purposes",
+  "main": "dist/spy.min.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/remojansen/typescript-spy-decorator.git"
+  },
+  "keywords": [
+    "spy",
+    "test",
+    "decorator",
+    "typescript"
+  ],
+  "author": "Remo H. Jansen <remo.jansen@wolksoftware.com> (http://www.remojansen.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/remojansen/typescript-spy-decorator/issues"
+  },
+  "homepage": "https://github.com/remojansen/typescript-spy-decorator"
+}
