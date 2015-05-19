@@ -1,8 +1,19 @@
 # TypeScript @spy decorator
 
-Inspired by [SinonJS](http://sinonjs.org/) and [Decorators & metadata reflection in TypeScript: From Novice to Expert](http://blog.wolksoftware.com/decorators-reflection-javascript-typescript)
+## @spy is a open-source TypeScript decorator which allows developers to spy method calls during the software testing process. 
+
+## What is a spy?
+A spy is a function that records some details like about a function when it is invoked. Some of the details recored include:
+
+- Arguments.
+- Return value.
+- The value of this. 
+- A exception thrown (if any). 
+
+Spies are useful to test how certain methods are used throughout a system under test. The following example shows how to use the @spy decorator to observe some methods.
 
 ## Code
+Let's write a simple class to demonstrate how to use the @spy decorator.
 ```
 class Calculator {
   public sume(a : number, b : number) : number {
@@ -14,7 +25,7 @@ class Calculator {
 }
 ```
 ## Spy
-
+@spy can spy on existing methods. When doing so, the original function will behave just as normal but you will have access to data about all calls. 
 ```
 import spy = require("spy-decorator");
 
@@ -31,6 +42,7 @@ class CalculatorSpy extends Calculator {
 }
 ```
 ## Test
+When the method decorated is invoked the @spy decorator will record the call details.
 ```
 var calculator = new CalculatorSpy();
 
