@@ -1,6 +1,6 @@
 /// <reference path="./call.d.ts"/>
 
-interface SpyInterface {
+interface ISpy {
 
   //Return the recorded calls.
   getCalls(): ICall[];

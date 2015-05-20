@@ -1,7 +1,7 @@
 /// <reference path="./spy.d.ts"/>
 /// <reference path="./call.d.ts"/>
 
-class Spy implements SpyInterface {
+class Spy implements Spy {
 
   private calls: ICall[];
 

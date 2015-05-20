@@ -7,38 +7,30 @@ import spy = require("../source/spy_decorator");
 var expect = chai.expect;
 
 class Calculator {
+  @spy
   public sume(a : number, b : number) : number {
     return a + b;
   }
+  @spy
   public multiply(a : number, b : number) : number {
    return a * b;
-  }
-}
-
-class CalculatorSpy extends Calculator {
-  public spies: any; // Set by decorator
-  @spy
-  public sume(a : number, b : number) : number {
-    return super.sume(a, b);
-  }
-  @spy
-  public multiply(a : number, b : number) : number {
-    return super.multiply(a, b);
   }
 }
 
 describe("Spy Class \n", () => {
 
   it('should log a function call when decorated method is invoked \n', () => {
-    var tester = new CalculatorSpy();
-    var result1 = tester.multiply(2, 3);
-    var result2 = tester.multiply(5, 5);
-    var multiplySpy : SpyInterface = tester.spies.multiply;
-    expect(multiplySpy.getCalls().length).to.equal(2);
-    expect(multiplySpy.getCalls()[0].returnValue).to.equal(result1);
-    expect(multiplySpy.getCalls()[1].returnValue).to.equal(result2);
-    expect(multiplySpy.getCalls()[0].thisValue).to.equal(tester);
-    expect(multiplySpy.getCalls()[1].thisValue).to.equal(tester);
+    var calculator = new Calculator();
+    var result1 = calculator.multiply(2,3);
+    var result2 = calculator.multiply(5,5);
+
+    var mSpy : ISpy = (<any>calculator).spies.multiply;
+
+    expect(mSpy.getCalls().length).to.equal(2);
+    expect(mSpy.getCalls()[0].returnValue.match(result1)).to.be.true;
+    expect(mSpy.getCalls()[1].returnValue.match(result1)).to.be.true;
+    expect(mSpy.getCalls()[0].thisValue.isDefined()).to.be.true;
+    expect(mSpy.getCalls()[1].thisValue.match(calculator)).to.be.true;
   });
 
   // Work in progress (Contributions are wellcome)
