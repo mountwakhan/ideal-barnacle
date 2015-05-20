@@ -12,9 +12,12 @@ class Call implements ICall {
   public calledWithNew : boolean;
 
   constructor(thisValue: any, calledWithNew : boolean, args: any[]) {
-  this.thisValue = thisValue;
-  this.calledWithNew = calledWithNew;
-    this.args = args;
+    this.thisValue = new Matcher(thisValue);
+    this.calledWithNew = calledWithNew;
+    this.args = [];
+    for(var i = 0; i < args.length; i++) {
+      this.args.push(new Matcher(args[i]));
+    }
   }
 
   public calledOn(obj: any): boolean {

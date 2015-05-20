@@ -1,8 +1,10 @@
 /// <reference path="./spy.d.ts"/>
 /// <reference path="./call.d.ts"/>
+/// <reference path="./matcher.d.ts"/>
 
 import Spy = require("./spy");
-import FunctionCall = require("./call");
+import Call = require("./call");
+import Matcher = require("./matcher");
 
 // method decorator
 function spy(target: any, key: string, descriptor: any) {
@@ -15,13 +17,16 @@ function spy(target: any, key: string, descriptor: any) {
   target.spies[key] = new Spy();
 
   descriptor.value = function (...args: any[]) {
-    var thisValue = this, calledWithNew, call, returnValue;
+    var thisValue, calledWithNew, call, returnValue;
+
+    thisValue = this;
     calledWithNew = (thisValue.constructor == target);
-    call = new FunctionCall(thisValue, calledWithNew, args);
+    call = new Call(thisValue, calledWithNew, args);
     returnValue = null;
+
     try {
-      returnValue = descriptor.value.apply(thisValue, args);
-      call.returnValue = returnValue;
+      returnValue = originalMethod.apply(thisValue, args);
+      call.returnValue = new Matcher(returnValue);
       target.spies[key].calls.push(call);
       return returnValue;
     }

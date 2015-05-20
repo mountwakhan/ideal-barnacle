@@ -1,8 +1,10 @@
+/// <reference path="./matcher.d.ts"/>
+
 interface ICall {
-  args: any[];
-  returnValue: any;
+  thisValue: IMatcher;
+  args: IMatcher[];
+  returnValue: IMatcher;
   exception: any;
-  thisValue: any;
   calledWithNew : boolean;
 
   // Returns true if obj was this for this call.

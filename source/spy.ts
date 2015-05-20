@@ -1,5 +1,5 @@
 /// <reference path="./spy.d.ts"/>
-/// <reference path="./function_call.d.ts"/>
+/// <reference path="./call.d.ts"/>
 
 class Spy implements SpyInterface {
 
