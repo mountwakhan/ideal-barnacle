@@ -41,7 +41,7 @@ class CalculatorSpy extends Calculator {
   }
 }
 ```
-Alternatively, we can add spy directly to the class declaration and use a gulp task (comming soon) to remove @spy annotations when deploying top a production environment.
+Alternatively, we can add spy directly to the class declaration and use a gulp task (coming soon) to remove @spy annotations when deploying top a production environment.
 ```
 class Calculator {
   @spy
