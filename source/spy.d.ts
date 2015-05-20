@@ -2,8 +2,8 @@
 
 interface SpyInterface {
 
-  //The recorded calls.
-  calls: FunctionCallInterface[];
+  //Return the recorded calls.
+  getCalls(): FunctionCallInterface[];
 
   // The number of recorded calls.
   callCount(): number;

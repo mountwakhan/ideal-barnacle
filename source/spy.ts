@@ -2,10 +2,15 @@
 /// <reference path="./function_call.d.ts"/>
 
 class Spy implements SpyInterface {
-  public calls: FunctionCallInterface[];
+
+  private calls: FunctionCallInterface[];
 
   constructor() {
     this.calls = [];
+  }
+
+  public getCalls() : FunctionCallInterface[] {
+    return this.calls;
   }
 
   public withArgs(...args: any[]): boolean {
