@@ -3,13 +3,13 @@
 
 class Spy implements SpyInterface {
 
-  private calls: FunctionCallInterface[];
+  private calls: ICall[];
 
   constructor() {
     this.calls = [];
   }
 
-  public getCalls() : FunctionCallInterface[] {
+  public getCalls() : ICall[] {
     return this.calls;
   }
 
@@ -37,30 +37,36 @@ class Spy implements SpyInterface {
     return (this.calls.length === 3);
   };
 
-  public firstCall(): FunctionCallInterface {
+  public firstCall(): ICall {
     return (this.calls.length > 1) ? this.calls[0] : null;
   };
 
-  public secondCall(): FunctionCallInterface {
+  public secondCall(): ICall {
     return (this.calls.length > 1) ? this.calls[1] : null;
   };
 
-  public thirdCall(): FunctionCallInterface {
+  public thirdCall(): ICall {
     return (this.calls.length > 1) ? this.calls[2] : null;
   };
 
-  public lastCall(): FunctionCallInterface {
+  public lastCall(): ICall {
     return this.calls[this.calls.length - 1];
   };
 
-  public getCall(n: number): FunctionCallInterface {
+  public getCall(n: number): ICall {
     return (this.calls.length >= n) ? this.calls[n - 1] : null;
   };
 
+  // NOTE based on SinonJS not sure aboit being able to do this with the
+  // decorator approach. Maybe we can store the performance now() API ?
+  // http://updates.html5rocks.com/2012/08/When-milliseconds-are-not-enough-performance-now
   public calledBefore(anotherSpy): boolean {
     throw new Error("Not implemented exception");
   };
 
+  // NOTE based on SinonJS not sure aboit being able to do this with the
+  // decorator approach. Maybe we can store the performance now() API ?
+  // http://updates.html5rocks.com/2012/08/When-milliseconds-are-not-enough-performance-now
   public calledAfter(anotherSpy): boolean {
     throw new Error("Not implemented exception");
   };

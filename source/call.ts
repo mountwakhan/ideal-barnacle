@@ -1,12 +1,14 @@
-/// <reference path="./function_call.d.ts"/>
+/// <reference path="./call.d.ts"/>
+/// <reference path="./matcher.d.ts"/>
 
-import Utils = require("./utils");
+import Matcher = require("./matcher");
 
-class FunctionCall implements FunctionCallInterface {
-  public thisValue: any;
-  public args: any[];
-  public returnValue: any;
-  public exception: any;
+class Call implements ICall {
+
+  public thisValue: IMatcher;
+  public args: IMatcher[];
+  public returnValue: IMatcher;
+  public exception: Error;
   public calledWithNew : boolean;
 
   constructor(thisValue: any, calledWithNew : boolean, args: any[]) {
@@ -16,7 +18,7 @@ class FunctionCall implements FunctionCallInterface {
   }
 
   public calledOn(obj: any): boolean {
-    return Utils.areEqual(this.thisValue, obj);
+    return this.thisValue.match(obj);
   };
 
   public calledWith(...args: any[]): boolean {
@@ -24,7 +26,8 @@ class FunctionCall implements FunctionCallInterface {
     itemsFound = 0;
     for (i = 0; i < args.length; i++) {
       for (j = 0; i < this.args.length; i++) {
-        if(Utils.areEqual(args[i], this.args[j])) {
+        var m = new Matcher(args[i]);
+        if(m.match(this.args[j])) {
           itemsFound += 1;
         }
       }
@@ -54,4 +57,4 @@ class FunctionCall implements FunctionCallInterface {
   };
 }
 
-export = FunctionCall;
+export = Call;

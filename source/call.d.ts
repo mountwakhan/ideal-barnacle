@@ -1,4 +1,4 @@
-interface FunctionCallInterface {
+interface ICall {
   args: any[];
   returnValue: any;
   exception: any;

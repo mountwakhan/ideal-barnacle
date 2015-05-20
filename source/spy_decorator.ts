@@ -1,8 +1,8 @@
 /// <reference path="./spy.d.ts"/>
-/// <reference path="./function_call.d.ts"/>
+/// <reference path="./call.d.ts"/>
 
 import Spy = require("./spy");
-import FunctionCall = require("./function_call");
+import FunctionCall = require("./call");
 
 // method decorator
 function spy(target: any, key: string, descriptor: any) {

@@ -1,61 +1,61 @@
-interface MatcherInterface {
+interface IMatcher {
 
-  // number - The value must be == to the given number.
-  // string - The value must be a string and have the expectation as a substring.
-  // RegExp - The value must be a string and match the given regular expression.
-  // any    - The value must be not null or undefined and have the all the expectation's properties.
-  // Function -
-  match(obj : (number|string|RegExp|Function|any));
+  // returns the value
+  value() : any;
+
+  // The value must be == to the given value
+  match(obj : any) : boolean;
 
   // Matches anything.
-  isAny
+  isAny() : boolean;
 
+  // Requires the value to be defined.
+  isDefined() : boolean;
 
-// Requires the value to be defined.
-isDefined
+  // Requires the value to be truthy.
+  isTruthy() : boolean;
 
-// Requires the value to be truthy.
-isTrue
+  // Requires the value to be falsy.
+  isFalsy() : boolean;
 
-// Requires the value to be falsy.
-isFalse
+  // Requires the value to be of the given type, where type can be one of
+  // "undefined", "null", "boolean", "number", "string", "object", "function",
+  // "array", "regexp" or "date".
+  isTypeOf(type) : boolean;
 
-isBool
-// Requires the value to be a boolean.
-isNumber
-// Requires the value to be a number.
-isString
-// Requires the value to be a string.
+  // Requires the value to be a boolean.
+  isBool() : boolean;
 
-// Requires the value to be an object.
-isObject
+  // Requires the value to be a number.
+  isNumber() : boolean;
 
-// Requires the value to be a function.
-isFunc
+  // Requires the value to be a string.
+  isString() : boolean;
 
-// Requires the value to be an array.
-isArray
+  // Requires the value to be an object.
+  isObject() : boolean;
 
-// Requires the value to be a regular expression.
-isRegexp
+  // Requires the value to be a function.
+  isFunc() : boolean;
 
-// Requires the value to be a date object.
-isDate
+  // Requires the value to be an array.
+  isArray() : boolean;
 
-// Requires the value to strictly equal ref.
-isSame(ref)
+  // Requires the value to be a regular expression.
+  isRegexp() : boolean;
 
+  // Requires the value to be a date object.
+  isDate() : boolean;
 
-isTypeOf(type)
-// Requires the value to be of the given type, where type can be one of
-// "undefined", "null", "boolean", "number", "string", "object", "function",
-// "array", "regexp" or "date".
+  // Requires the value to strictly equal ref.
+  isSame(ref) : boolean;
 
-isInstanceOf(type)
-// Requires the value to be an instance of the given type.
+  // Requires the value to be an instance of the given type.
+  isInstanceOf(type) : boolean;
 
-// Requires the value to define the given property.
-itHas(property)
+  // Requires the value to define the given property.
+  itHas(property) : boolean;
 
-
-itHasOwn(property)
+  // the property must be defined by the value itself. Inherited properties are ignored.
+  itHasOwn(property) : boolean;
+}

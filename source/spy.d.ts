@@ -1,9 +1,9 @@
-/// <reference path="./function_call.d.ts"/>
+/// <reference path="./call.d.ts"/>
 
 interface SpyInterface {
 
   //Return the recorded calls.
-  getCalls(): FunctionCallInterface[];
+  getCalls(): ICall[];
 
   // The number of recorded calls.
   callCount(): number;
@@ -21,24 +21,30 @@ interface SpyInterface {
   calledThrice(): boolean;
 
   // The first call
-  firstCall(): FunctionCallInterface;
+  firstCall(): ICall;
 
   // The second call
-  secondCall(): FunctionCallInterface;
+  secondCall(): ICall;
 
   // The third call
-  thirdCall(): FunctionCallInterface;
+  thirdCall(): ICall;
 
   // The last call
-  lastCall(): FunctionCallInterface;
+  lastCall(): ICall;
 
   // The n call
-  getCall(n: number): FunctionCallInterface;
+  getCall(n: number): ICall;
 
   // Returns true if the spy was called before anotherSpy
+  // NOTE based on SinonJS not sure aboit being able to do this with the
+  // decorator approach. Maybe we can store the performance now() API ?
+  // http://updates.html5rocks.com/2012/08/When-milliseconds-are-not-enough-performance-now
   calledBefore(anotherSpy): boolean;
 
   // Returns true if the spy was called after anotherSpy
+  // NOTE based on SinonJS not sure aboit being able to do this with the
+  // decorator approach. Maybe we can store the performance now() API ?
+  // http://updates.html5rocks.com/2012/08/When-milliseconds-are-not-enough-performance-now
   calledAfter(anotherSpy): boolean;
 
   //  Returns true if the spy was called at least once with obj as this.

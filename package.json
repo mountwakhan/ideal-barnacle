@@ -32,6 +32,7 @@
     "gulp-header": "^1.2.2",
     "gulp-tslint": "^3.0.1-beta",
     "gulp-typescript": "^2.7.5",
+    "typescript": "^1.5.0-beta",
     "gulp-uglify": "^1.2.0",
     "karma": "^0.12.32",
     "karma-chai": "^0.1.0",
