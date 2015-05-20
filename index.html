@@ -74,6 +74,33 @@ class CalculatorSpy extends Calculator {
 }
 </code></pre>
 
+<p>Alternatively, we can add spy directly to the class declaration and use a gulp task (comming soon) to remove <a href="https://github.com/spy" class="user-mention">@spy</a> annotations when deploying top a production environment.</p>
+
+<pre><code>class Calculator {
+  @spy
+  public sume(a : number, b : number) : number {
+    return a + b;
+  }
+  @spy
+  public multiply(a : number, b : number) : number {
+   return a * b;
+  }
+}
+</code></pre>
+
+<p>We are also going to develop a class decorator:</p>
+
+<pre><code>@spy
+class Calculator {
+  public sume(a : number, b : number) : number {
+    return a + b;
+  }
+  public multiply(a : number, b : number) : number {
+   return a * b;
+  }
+}
+</code></pre>
+
 <h2>
 <a id="test" class="anchor" href="#test" aria-hidden="true"><span class="octicon octicon-link"></span></a>Test</h2>
 
