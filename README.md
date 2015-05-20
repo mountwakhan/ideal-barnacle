@@ -64,7 +64,6 @@ var calculator = new Calculator();
 var result1 = calculator.multiply(2, 3);
 var result2 = calculator.multiply(5, 5);
 
-
 var mSpy : ISpy = (<any>calculator).spies.multiply;
 var spies = AtSpy.getSpies(calculator);
 
