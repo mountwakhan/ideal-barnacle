@@ -22,7 +22,7 @@ class Call implements ICall {
 
   public calledOn(obj: any): boolean {
     return this.thisValue.match(obj);
-  };
+  }
 
   public calledWith(...args: any[]): boolean {
     var i, j, itemsFound;
@@ -36,28 +36,28 @@ class Call implements ICall {
       }
     }
     return (itemsFound === args.length);
-  };
+  }
 
   public calledWithExactly(...args: any[]): boolean {
   if (args.length !== this.args.length) { return false; }
   return this.calledWith(args);
-  };
+  }
 
   public calledWithMatch(...args: any[]): boolean {
     throw new Error("Not implemented exception");
-  };
+  }
 
   public notCalledWith(...args: any[]): boolean {
     throw new Error("Not implemented exception");
-  };
+  }
 
   public notCalledWithMatch(...args: any[]): boolean {
     throw new Error("Not implemented exception");
-  };
+  }
 
   public threw(obj?: any): boolean {
     throw new Error("Not implemented exception");
-  };
+  }
 }
 
 export = Call;
