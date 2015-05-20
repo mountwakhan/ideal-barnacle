@@ -30,7 +30,7 @@ class Calculator {
 
 @spy can spy on methods. When doing so, the original function will behave just as normal but you will have access to data about all calls.
 
-We can add spy to the class declaration and use a gulp task (coming soon) to remove Atspy annotations when deploying top a production environment.
+We can add spy to the class declaration and use a gulp task (coming soon) to remove Atspy annotations when deploying to a production environment.
 
 ```
 // add a spy to an specific method
