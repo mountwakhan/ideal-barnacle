@@ -66,7 +66,7 @@ var calculator = new Calculator();
 var result1 = calculator.multiply(2, 3);
 var result2 = calculator.multiply(5, 5);
 
-var spies = AtSpy.getSpies(calculator).multiply;
+var s = AtSpy.getSpies(calculator).multiply;
 
 s.called();                            // true
 s.calledOnce();                        // false
