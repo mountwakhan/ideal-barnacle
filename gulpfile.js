@@ -13,6 +13,7 @@ var gulp        = require("gulp"),
     uglify      = require("gulp-uglify"),
     typescript  = require("typescript"),
     runSequence = require("run-sequence"),
+    glob        = require("glob"),
     header      = require("gulp-header"),
     pkg         = require(__dirname + "/package.json");
 
@@ -69,17 +70,26 @@ gulp.task("bundle-source", function () {
     .pipe(gulp.dest(__dirname + "/bundle/source/"));
 });
 
-gulp.task("bundle-test", ["build-test"], function () {
-  var b = browserify({
-    standalone : 'test',
-    entries: __dirname + "/build/test/bdd.test.js",
-    debug: true
-  });
+gulp.task("bundle-test", function () {
+  glob("**/*.js", function (er, files) {
+    for(var i = 0; i < files.length; i ++) {
 
-  return b.bundle()
-    .pipe(source("bdd.test.js"))
-    .pipe(buffer())
-    .pipe(gulp.dest(__dirname + "/bundle/test/"));
+      var file = files[i];
+
+      if(!er) {
+        var b = browserify({
+          standalone : 'atspytest',
+          entries: __dirname + "/build/test/" + file,
+          debug: true
+        });
+
+        r = b.bundle()
+             .pipe(source(file))
+             .pipe(buffer())
+             .pipe(gulp.dest(__dirname + "/bundle/test/"));
+      }
+    }
+  });
 });
 
 //******************************************************************************
@@ -101,7 +111,7 @@ gulp.task("compress", function() {
              .pipe(gulp.dest(__dirname + "/dist/"))
 });
 
-gulp.task("copyright", function() {
+gulp.task("addheader", function() {
 
   var pkg = require(__dirname + "/package.json");
 
@@ -122,5 +132,14 @@ gulp.task("copyright", function() {
 //* DEFAULT
 //******************************************************************************
 gulp.task('default', function(cb){
-
+  runSequence(
+    "lint",
+    "build-source",
+    "build-test",     // not working!
+    "bundle-source",
+    "bundle-test",
+    "test",
+    "compress",
+    "addheader",
+    cb);
 });
