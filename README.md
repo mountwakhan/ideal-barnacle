@@ -2,7 +2,7 @@
 
 [![Join the chat at https://gitter.im/AtSpy/typescript-spy-decorator](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/AtSpy/typescript-spy-decorator?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-## @spy is a open-source TypeScript decorator which allows developers to spy method calls during the software testing process.
+## @spy is a TypeScript decorator which allows developers to spy method calls during the software testing process.
 
 ## What is a spy?
 A spy is a function that records some details  about a function when it is invoked. Some of these details recored include:
