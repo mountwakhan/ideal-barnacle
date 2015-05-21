@@ -35,3 +35,6 @@ source/*.js
 source/*.json
 test/*.js
 test/*.json
+
+build
+bundle

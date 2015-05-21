@@ -11,6 +11,7 @@ var gulp        = require("gulp"),
     tsc         = require("gulp-typescript"),
     karma       = require("karma").server,
     uglify      = require("gulp-uglify"),
+    typescript  = require("typescript"),
     runSequence = require("run-sequence"),
     header      = require("gulp-header"),
     pkg         = require(__dirname + "/package.json");
@@ -33,9 +34,11 @@ gulp.task("lint", function() {
 var tsProject = tsc.createProject({
   removeComments : false,
   noImplicitAny : false,
-  target : "ES5",
+  target : "es5",
   module : "commonjs",
-  declarationFiles : false
+  declarationFiles : false,
+  emitDecoratorMetadata : true,
+  typescript: typescript
 });
 
 gulp.task("build-source", function() {
@@ -50,24 +53,20 @@ gulp.task("build-test", function() {
              .js.pipe(gulp.dest(__dirname + "/build/test/"));
 });
 
-gulp.task("build", function(cb) {
-  runSequence("lint", ["bundle-source", "bundle-test"], cb);
-});
-
 //******************************************************************************
 //* BUNDLE
 //******************************************************************************
-gulp.task("bundle-source", ["bundle-source"], function () {
+gulp.task("bundle-source", function () {
   var b = browserify({
-    standalone : 'demos',
-    entries: __dirname + "/build/source/demos.js",
+    standalone : 'atspy',
+    entries: __dirname + "/build/source/atspy.js",
     debug: true
   });
 
   return b.bundle()
-    .pipe(source("demos.js"))
+    .pipe(source("atspy.js"))
     .pipe(buffer())
-    .pipe(gulp.dest(__dirname + "/bundled/source/"));
+    .pipe(gulp.dest(__dirname + "/bundle/source/"));
 });
 
 gulp.task("bundle-test", ["build-test"], function () {
@@ -80,13 +79,13 @@ gulp.task("bundle-test", ["build-test"], function () {
   return b.bundle()
     .pipe(source("bdd.test.js"))
     .pipe(buffer())
-    .pipe(gulp.dest(__dirname + "/bundled/test/"));
+    .pipe(gulp.dest(__dirname + "/bundle/test/"));
 });
 
 //******************************************************************************
 //* TEST
 //******************************************************************************
-gulp.task("test", ["bundle-test"], function(cb) {
+gulp.task("test", function(cb) {
   karma.start({
     configFile : __dirname + "/karma.conf.js",
     singleRun: true
@@ -94,15 +93,15 @@ gulp.task("test", ["bundle-test"], function(cb) {
 });
 
 //******************************************************************************
-//* BAKE
+//* READY FOR DIST
 //******************************************************************************
-gulp.task("compress", ["test"], function() {
-  return gulp.src(__dirname + "/bundled/source/demos.js")
+gulp.task("compress", function() {
+  return gulp.src(__dirname + "/bundle/source/atspy.js")
              .pipe(uglify({ preserveComments : false }))
              .pipe(gulp.dest(__dirname + "/dist/"))
 });
 
-gulp.task("bake",["compress"], function() {
+gulp.task("copyright", function() {
 
   var pkg = require(__dirname + "/package.json");
 
@@ -114,7 +113,7 @@ gulp.task("bake",["compress"], function() {
     " */",
     ""].join("\n");
 
-  return gulp.src(__dirname + "/dist/demos.js")
+  return gulp.src(__dirname + "/dist/atspy.js")
              .pipe(header(banner, { pkg : pkg } ))
              .pipe(gulp.dest(__dirname + "/dist/"));
 });
@@ -122,4 +121,6 @@ gulp.task("bake",["compress"], function() {
 //******************************************************************************
 //* DEFAULT
 //******************************************************************************
-gulp.task('default', ["bake"]);
+gulp.task('default', function(cb){
+
+});

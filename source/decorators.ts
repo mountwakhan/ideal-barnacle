@@ -7,7 +7,7 @@ import Call = require("./call");
 import Matcher = require("./matcher");
 
 // method decorator
-function spy(target: any, key: string, descriptor: any) {
+function spyMethodDecorator(target: any, key: string, descriptor: any) {
 
   // save a reference to the method
   var originalMethod = descriptor.value;
@@ -40,4 +40,9 @@ function spy(target: any, key: string, descriptor: any) {
   return descriptor;
 }
 
-export = spy;
+var decorators = {
+  class : null,
+  method : spyMethodDecorator
+};
+
+export = decorators;

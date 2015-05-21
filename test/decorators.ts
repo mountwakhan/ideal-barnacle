@@ -2,7 +2,9 @@
 
 import Spy = require("../source/spy");
 import FunctionCall = require("../source/call");
-import spy = require("../source/spy_decorator");
+import decorators = require("../source/decorators");
+
+var spy = decorators.method;
 
 var expect = chai.expect;
 
