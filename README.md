@@ -1,8 +1,8 @@
 # AtSpy
 
-[![Join the chat at https://gitter.im/AtSpy/typescript-spy-decorator](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/AtSpy/AtSpy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/AtSpy/AtSpy](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/AtSpy/AtSpy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-## Standalone test spies for JavaScript powered by [TypeScript](http://www.typescriptlang.org/), [Gulp](http://gulpjs.com/) & [Decorators (ES7)](https://github.com/wycats/javascript-decorators). No dependencies, works with any unit testing framework.
+## Standalone test spies for JavaScript powered by [TypeScript](http://www.typescriptlang.org/) & [Decorators (ES7)](https://github.com/wycats/javascript-decorators). No dependencies, works with any unit testing framework.
 
 ## What is a spy?
 A spy is a function that records some details  about a function when it is invoked. Some of these details recored include:
