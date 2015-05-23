@@ -1,9 +1,14 @@
-/// <reference path="./matcher.d.ts"/>
+/// <reference path="./type_checker.d.ts"/>
 
+/*
+* When a funciton being observed by a Spy is invoked a new
+* instance of Call is created. Some of the details a about the
+* function Call (eg. returnValue) are wrapped with a TypeChecker.
+*/
 interface ICall {
-  thisValue: IMatcher;
-  args: IMatcher[];
-  returnValue: IMatcher;
+  thisValue: ITypeChecker;
+  args: ITypeChecker[];
+  returnValue: ITypeChecker;
   exception: any;
   calledWithNew : boolean;
 
@@ -16,14 +21,14 @@ interface ICall {
   // Returns true if call received provided arguments and no others.
   calledWithExactly(...args: any[]): boolean;
 
-  // Returns true if call received matching arguments (and possibly others).
-  calledWithMatch(...args: any[]): boolean;
-
   // Returns true if call did not receive provided arguments.
   notCalledWith(...args: any[]): boolean;
 
+  // Returns true if call received matching arguments (and possibly others).
+  calledWithMatch(...args : ((tc : ITypeChecker) => boolean)[]) : boolean;
+
   // Returns true if call did not receive matching arguments.
-  notCalledWithMatch(...args: any[]): boolean;
+  notCalledWithMatch(...args: ((tc : ITypeChecker) => boolean)[]): boolean;
 
   // Returns true if call threw an exception / threw exception of provided type.
   threw(obj?: any): boolean;

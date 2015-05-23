@@ -1,11 +1,13 @@
-/// <reference path="./atspy.d.ts"/>
-/// <reference path="./call.d.ts"/>
-/// <reference path="./matcher.d.ts"/>
-/// <reference path="./spy.d.ts"/>
+/// <reference path="./interfaces/atspy.d.ts"/>
+/// <reference path="./interfaces/call.d.ts"/>
+/// <reference path="./interfaces/matcher.d.ts"/>
+/// <reference path="./interfaces/spy.d.ts"/>
 
 import decorators = require("./decorators");
 
-class AtSpy {
+// Check IAtSpy (atspy.d.ts) for documentation.
+
+class AtSpy implements IAtSpy{
   public decorators : {
     class : ClassDecorator,
     method : MethodDecorator

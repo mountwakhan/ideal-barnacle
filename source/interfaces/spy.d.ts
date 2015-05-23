@@ -1,5 +1,9 @@
 /// <reference path="./call.d.ts"/>
 
+/*
+* Spy
+*/
+
 interface ISpy {
 
   //Return the recorded calls.

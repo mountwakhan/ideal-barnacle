@@ -1,9 +1,18 @@
-interface IMatcher {
+/*
+* TypeChecker is used to wrap values with some of utilities.
+* When a funciton being observed by a Spy is invoked a new
+* instance of Call is created. Some of the details a about the
+* function Call (eg. returnValue) are wrapped with a TypeChecker.
+*
+* TypeChecker are also used when we work with a Marcher.
+*/
 
-  // returns the value
+interface ITypeChecker {
+
+  // returns the value.
   value() : any;
 
-  // The value must be == to the given value
+  // The value must be == to the given value.
   match(obj : any) : boolean;
 
   // Matches anything.
@@ -21,7 +30,7 @@ interface IMatcher {
   // Requires the value to be of the given type, where type can be one of
   // "undefined", "null", "boolean", "number", "string", "object", "function",
   // "array", "regexp" or "date".
-  isTypeOf(type) : boolean;
+  isTypeOf(t : string) : boolean;
 
   // Requires the value to be a boolean.
   isBool() : boolean;
@@ -51,11 +60,11 @@ interface IMatcher {
   isSame(ref) : boolean;
 
   // Requires the value to be an instance of the given type.
-  isInstanceOf(type) : boolean;
+  isInstanceOf(a : any) : boolean;
 
   // Requires the value to define the given property.
   itHas(property) : boolean;
 
-  // the property must be defined by the value itself. Inherited properties are ignored.
+  // The property must be defined by the value itself. Inherited properties are ignored.
   itHasOwn(property) : boolean;
 }

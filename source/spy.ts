@@ -1,7 +1,9 @@
-/// <reference path="./spy.d.ts"/>
-/// <reference path="./call.d.ts"/>
+/// <reference path="./interfaces/spy.d.ts"/>
+/// <reference path="./interfaces/call.d.ts"/>
 
-class Spy implements Spy {
+// Check ISpy (spy.d.ts) for documentation.
+
+class Spy implements ISpy {
 
   private calls: ICall[];
 

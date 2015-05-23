@@ -13,7 +13,6 @@ var gulp        = require("gulp"),
     uglify      = require("gulp-uglify"),
     typescript  = require("typescript"),
     runSequence = require("run-sequence"),
-    glob        = require("glob"),
     header      = require("gulp-header"),
     pkg         = require(__dirname + "/package.json");
 
@@ -42,7 +41,7 @@ var tsProject = tsc.createProject({
   typescript: typescript
 });
 
-gulp.task("build-source", function() {
+gulp.task("build-source", ["build-test"], function() {
   return gulp.src(__dirname + "/source/*.ts")
              .pipe(tsc(tsProject))
              .js.pipe(gulp.dest(__dirname + "/build/source/"));
@@ -55,9 +54,9 @@ gulp.task("build-test", function() {
 });
 
 //******************************************************************************
-//* BUNDLE
+//* BROWSERIFY
 //******************************************************************************
-gulp.task("bundle-source", function () {
+gulp.task("browserify-source", function () {
   var b = browserify({
     standalone : 'atspy',
     entries: __dirname + "/build/source/atspy.js",
@@ -70,25 +69,29 @@ gulp.task("bundle-source", function () {
     .pipe(gulp.dest(__dirname + "/bundle/source/"));
 });
 
-gulp.task("bundle-test", function () {
-  glob("**/*.js", function (er, files) {
-    for(var i = 0; i < files.length; i ++) {
+var specs = [
+  'decorators',
+  'call',
+  'spy',
+  'type_checker',
+  'matcher'
+];
 
-      var file = files[i];
+//create a gulp task for each spec in specs[]
+specs.forEach(function(spec) {
+  gulp.task("browserify-" + spec, function() {
+    var file = __dirname + "/build/test/" + spec + ".spec.js";
 
-      if(!er) {
-        var b = browserify({
-          standalone : 'atspytest',
-          entries: __dirname + "/build/test/" + file,
-          debug: true
-        });
+    var b = browserify({
+      standalone : spec,
+      entries: file,
+      debug: true
+    });
 
-        r = b.bundle()
-             .pipe(source(file))
-             .pipe(buffer())
-             .pipe(gulp.dest(__dirname + "/bundle/test/"));
-      }
-    }
+    return b.bundle()
+          .pipe(source(spec + ".spec.js"))
+          .pipe(buffer())
+          .pipe(gulp.dest(__dirname + "/bundle/test/"));
   });
 });
 
@@ -135,9 +138,13 @@ gulp.task('default', function(cb){
   runSequence(
     "lint",
     "build-source",
-    "build-test",     // not working!
-    "bundle-source",
-    "bundle-test",
+    //"build-test",
+    "browserify-source",
+    "browserify-decorators",
+    "browserify-call",
+    "browserify-spy",
+    "browserify-type_checker",
+    "browserify-matcher",
     "test",
     "compress",
     "addheader",

@@ -1,22 +1,32 @@
-/// <reference path="./call.d.ts"/>
-/// <reference path="./matcher.d.ts"/>
+/// <reference path="./interfaces/call.d.ts"/>
+/// <reference path="./interfaces/type_checker.d.ts"/>
 
-import Matcher = require("./matcher");
+import TypeChecker = require("./type_checker");
+
+// Check ICall (call.d.ts) for documentation.
 
 class Call implements ICall {
 
-  public thisValue: IMatcher;
-  public args: IMatcher[];
-  public returnValue: IMatcher;
-  public exception: Error;
+  public highResTimeStamp;
+  public thisValue: ITypeChecker;
+  public args: ITypeChecker[];
+  public returnValue: ITypeChecker;
+  public exception: ITypeChecker;
   public calledWithNew : boolean;
 
   constructor(thisValue: any, calledWithNew : boolean, args: any[]) {
-    this.thisValue = new Matcher(thisValue);
+    if(typeof performance === "undefined" && typeof performance.now === "function") {
+      this.highResTimeStamp =  performance.now();
+    }
+    else {
+      // performance.now() fallback
+      this.highResTimeStamp = new Date().getTime();
+    }
+    this.thisValue = new TypeChecker(thisValue);
     this.calledWithNew = calledWithNew;
     this.args = [];
     for(var i = 0; i < args.length; i++) {
-      this.args.push(new Matcher(args[i]));
+      this.args.push(new TypeChecker(args[i]));
     }
   }
 
@@ -25,38 +35,50 @@ class Call implements ICall {
   }
 
   public calledWith(...args: any[]): boolean {
-    var i, j, itemsFound;
-    itemsFound = 0;
-    for (i = 0; i < args.length; i++) {
-      for (j = 0; i < this.args.length; i++) {
-        var m = new Matcher(args[i]);
-        if(m.match(this.args[j])) {
-          itemsFound += 1;
-        }
-      }
+    var l = args.length;
+    if (l > this.args.length) {
+        return false;
     }
-    return (itemsFound === args.length);
+    for (var i = 0; i < l; i += 1) {
+        if (!this.args[i].match(arguments[i])) {
+            return false;
+        }
+    }
+    return true;
   }
 
   public calledWithExactly(...args: any[]): boolean {
-  if (args.length !== this.args.length) { return false; }
-  return this.calledWith(args);
-  }
-
-  public calledWithMatch(...args: any[]): boolean {
-    throw new Error("Not implemented exception");
+    return arguments.length == this.args.length &&
+           this.calledWith.apply(this, arguments);
   }
 
   public notCalledWith(...args: any[]): boolean {
-    throw new Error("Not implemented exception");
+    return !this.calledWith(args);
   }
 
-  public notCalledWithMatch(...args: any[]): boolean {
-    throw new Error("Not implemented exception");
+  public calledWithMatch(...args : ((tc : ITypeChecker) => boolean)[]) : boolean {
+    var l = args.length;
+    if (l > this.args.length) {
+        return false;
+    }
+    for (var i = 0; i < l; i += 1) {
+        var comparer = args[i];
+        if (!comparer(this.args[i])) {
+            return false;
+        }
+    }
+    return true;
   }
 
-  public threw(obj?: any): boolean {
-    throw new Error("Not implemented exception");
+  public notCalledWithMatch(...args: ((tc : ITypeChecker) => boolean)[]): boolean {
+    return !this.calledWithMatch(...args);
+  }
+
+  public threw(error?: any): boolean {
+    if (this.exception.isDefined()) {
+        return !!this.exception;
+    }
+    return this.exception.value() === error || this.exception.value().name === error;
   }
 }
 

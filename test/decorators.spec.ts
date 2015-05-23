@@ -19,7 +19,7 @@ class Calculator {
   }
 }
 
-describe("Spy Class \n", () => {
+describe("Method Decorator \n", () => {
 
   it('should log a function call when decorated method is invoked \n', () => {
     var calculator = new Calculator();
@@ -29,10 +29,10 @@ describe("Spy Class \n", () => {
     var mSpy : ISpy = (<any>calculator).spies.multiply;
 
     expect(mSpy.getCalls().length).to.equal(2);
-    expect(mSpy.getCalls()[0].returnValue.match(result1)).to.be.true;
-    expect(mSpy.getCalls()[1].returnValue.match(result1)).to.be.true;
-    expect(mSpy.getCalls()[0].thisValue.isDefined()).to.be.true;
-    expect(mSpy.getCalls()[1].thisValue.match(calculator)).to.be.true;
+    expect(mSpy.getCalls()[0].returnValue.value()).to.equal(result1);
+    expect(mSpy.getCalls()[1].returnValue.value()).to.equal(result2);
+    expect(mSpy.getCalls()[0].thisValue.value()).to.be.a("object");
+    expect(mSpy.getCalls()[1].thisValue.value()).to.equal(calculator);
   });
 
   // Work in progress (Contributions are wellcome)

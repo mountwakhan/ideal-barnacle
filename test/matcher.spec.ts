@@ -1,15 +1,20 @@
 ///<reference path="../typings/tsd.d.ts" />
+/// <reference path="../source/interfaces/type_checker.d.ts"/>
 
+import TypeChecker = require("../source/type_checker");
 import Matcher = require("../source/matcher");
 
 var expect = chai.expect;
 
-describe("Spy Class \n", () => {
+describe("Matcher Class \n", () => {
 
-  it('should set value correctly when instanciated\n', () => {
-    var m = new Matcher(1);
-    expect(m.isNumber()).to.be.true;
-    expect(m.match(1)).to.be.true;
+  it('should be able to validate a number \n', () => {
+    var m = new Matcher();
+    var isNumberMatcher = m.isNumber;
+    expect(isNumberMatcher(new TypeChecker(5))).to.be.true;
+    expect(isNumberMatcher(new TypeChecker(true))).to.be.false;
+    expect(isNumberMatcher(new TypeChecker("test"))).to.be.false;
+    expect(isNumberMatcher(new TypeChecker({ test : "test" }))).to.be.false;
   });
 
   // Work in progress (Contributions are wellcome)

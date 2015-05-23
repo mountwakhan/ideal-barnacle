@@ -1,10 +1,10 @@
-/// <reference path="./spy.d.ts"/>
-/// <reference path="./call.d.ts"/>
-/// <reference path="./matcher.d.ts"/>
+/// <reference path="./interfaces/spy.d.ts"/>
+/// <reference path="./interfaces/call.d.ts"/>
+/// <reference path="./interfaces/type_checker.d.ts"/>
 
 import Spy = require("./spy");
 import Call = require("./call");
-import Matcher = require("./matcher");
+import TypeChecker = require("./type_checker");
 
 // method decorator
 function spyMethodDecorator(target: any, key: string, descriptor: any) {
@@ -26,7 +26,7 @@ function spyMethodDecorator(target: any, key: string, descriptor: any) {
 
     try {
       returnValue = originalMethod.apply(thisValue, args);
-      call.returnValue = new Matcher(returnValue);
+      call.returnValue = new TypeChecker(returnValue);
       target.spies[key].calls.push(call);
       return returnValue;
     }

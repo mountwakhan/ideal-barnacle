@@ -1,10 +1,12 @@
 module.exports = function (config) {
   'use strict';
-  
+
   config.set({
       basePath: '',
       frameworks: ['mocha', 'chai', 'sinon'],
-      browsers: ['PhantomJS'],
+      // Use Chrome for now https://github.com/ariya/phantomjs/issues/12204
+      // browsers: ['PhantomJS'],
+      browsers: ['Chrome', 'Firefox'],
       reporters: ['progress', 'coverage'],
       coverageReporter: {
         type : 'lcov',
@@ -15,13 +17,16 @@ module.exports = function (config) {
         'karma-mocha',
         'karma-chai',
         'karma-sinon',
-        'karma-phantomjs-launcher'
+        // Use Chrome for now https://github.com/ariya/phantomjs/issues/12204
+        // 'karma-phantomjs-launcher',
+        'karma-chrome-launcher',
+        'karma-firefox-launcher'
       ],
       preprocessors: {
         '**/bundled/test/*.spec.js' : 'coverage'
       },
       files : [
-        { pattern: __dirname + "/bundled/test/*.spec.js", included: true }
+        { pattern: __dirname + "/bundle/test/*.spec.js", included: true }
       ],
       client : {
         mocha : {
@@ -31,6 +36,6 @@ module.exports = function (config) {
       port: 9876,
       colors: true,
       autoWatch: false,
-      logLevel: config.DEBUG
+      logLevel: config.INFO
   });
 };
