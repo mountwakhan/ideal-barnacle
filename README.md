@@ -74,7 +74,7 @@ s.calledTwice();                       // true
 s.calledThrice();                      // false
 s.callCount();                         // 2
 s.threw();                             // false
-s.firstCall().returnValue;             // Matcher(5)
+s.firstCall().returnValue;             // TypeChecker(5)
 s.firstCall().returnValue.isDefined(); // true
 s.firstCall().returnValue.match(5);    // true
 s.firstCall().returnValue.value();     // 5
