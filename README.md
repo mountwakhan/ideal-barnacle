@@ -1,6 +1,7 @@
 # AtSpy
 
 [![Join the chat at https://gitter.im/AtSpy/AtSpy](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/AtSpy/AtSpy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![build](https://travis-ci.org/AtSpy/AtSpy.svg)](https://travis-ci.org/AtSpy/AtSpy)
 
 ## Standalone test spies for JavaScript powered by [TypeScript](http://www.typescriptlang.org/) & [Decorators (ES7)](https://github.com/wycats/javascript-decorators). No dependencies, works with any unit testing framework.
 
@@ -74,7 +75,7 @@ s.calledTwice();                       // true
 s.calledThrice();                      // false
 s.callCount();                         // 2
 s.threw();                             // false
-s.firstCall().returnValue;             // Matcher(5)
+s.firstCall().returnValue;             // TypeChecker(5)
 s.firstCall().returnValue.isDefined(); // true
 s.firstCall().returnValue.match(5);    // true
 s.firstCall().returnValue.value();     // 5
