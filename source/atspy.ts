@@ -21,6 +21,10 @@ class AtSpy implements IAtSpy{
   public getSpies(obj : any) : ISpy[] {
     return (<any>obj).spies;
   }
+
+  public getCallStack(spies : ISpy[]) : ICall[] {
+    throw new Error("Not implemented exception");
+  }
 }
 
 var atspy = new AtSpy;

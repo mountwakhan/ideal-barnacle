@@ -70,8 +70,8 @@ interface IMatcher {
   isInstanceOf(a : any) : (a : ITypeChecker) => boolean;
 
   // Requires the value to define the given property.
-  itHas(property : any) : (a : ITypeChecker) => boolean;
+  itHas(property : string) : (a : ITypeChecker) => boolean;
 
   // The property must be defined by the value itself. Inherited properties are ignored.
-  itHasOwn(a : any) : (a : ITypeChecker) => boolean;
+  itHasOwn(a : string) : (a : ITypeChecker) => boolean;
 }

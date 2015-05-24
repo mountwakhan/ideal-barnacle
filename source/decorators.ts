@@ -40,8 +40,15 @@ function spyMethodDecorator(target: any, key: string, descriptor: any) {
   return descriptor;
 }
 
+// class decorator
+function spyClassDecorator() {
+  return function (target: Function) {
+    throw new Error("Not implemented exception");
+  }
+}
+
 var decorators = {
-  class : null,
+  class : spyClassDecorator,
   method : spyMethodDecorator
 };
 

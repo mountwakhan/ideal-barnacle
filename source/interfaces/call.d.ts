@@ -4,6 +4,9 @@
 * When a funciton being observed by a Spy is invoked a new
 * instance of Call is created. Some of the details a about the
 * function Call (eg. returnValue) are wrapped with a TypeChecker.
+*
+* The Spy is not in charge of creating the Call instances. That
+* responsibility  is in hands of the decorators.
 */
 interface ICall {
   thisValue: ITypeChecker;

@@ -1,7 +1,14 @@
 /// <reference path="./call.d.ts"/>
 
 /*
-* Spy
+* When a funciton being observed by a Spy is invoked a new
+* instance of Call is created. The Spy is used to store a collection of calls.
+* A Spy also provides a serie of utilities that allow develpers to query
+* the collection of Calls hold by the Spy.
+*
+* The Spy is not in charge of creating the Call instances. That responsibility
+* is in hands of the decorators. Decorators will create an Spy for each method
+* being observed and Call instance eahc time one of those methods is invoked.
 */
 
 interface ISpy {
