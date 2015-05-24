@@ -180,23 +180,6 @@ describe("TypeChecker Class \n", () => {
     expect(new TypeChecker({}).isRegexp()).to.equal(false);
   });
 
-  it('should be able to identify regular expressions \n', () => {
-
-    // using isTypeOf()
-    expect(new TypeChecker(new RegExp('ab+c', 'i')).isTypeOf("regexp")).to.equal(true);
-    expect(new TypeChecker(new Date()).isTypeOf("regexp")).to.equal(false);
-    expect(new TypeChecker(function foo(){}).isTypeOf("regexp")).to.equal(false);
-    expect(new TypeChecker(1).isTypeOf("regexp")).to.equal(false);
-    expect(new TypeChecker({}).isTypeOf("regexp")).to.equal(false);
-
-    // using isRegExp()
-    expect(new TypeChecker(new RegExp('ab+c', 'i')).isRegexp()).to.equal(true);
-    expect(new TypeChecker(new Date()).isRegexp()).to.equal(false);
-    expect(new TypeChecker(function foo(){}).isRegexp()).to.equal(false);
-    expect(new TypeChecker(1).isRegexp()).to.equal(false);
-    expect(new TypeChecker({}).isRegexp()).to.equal(false);
-  });
-
   it('should be able to identify strict equal objects \n', () => {
     var r = new RegExp('ab+c', 'i');
     var d = new Date();
@@ -279,5 +262,9 @@ describe("TypeChecker Class \n", () => {
     var test  = { test : "test" };
     expect(new TypeChecker(test).itHas("test")).to.equal(true);
   });
+
+  // TODO
+  it('should be able to match primitive types \n');
+  it('should be able to match complex types \n');
 
 });

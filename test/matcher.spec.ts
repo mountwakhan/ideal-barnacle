@@ -8,15 +8,22 @@ var expect = chai.expect;
 
 describe("Matcher Class \n", () => {
 
-  it('should be able to validate a number \n', () => {
-    var m = new Matcher();
-    var isNumberMatcher = m.isNumber;
-    expect(isNumberMatcher(new TypeChecker(5))).to.be.true;
-    expect(isNumberMatcher(new TypeChecker(true))).to.be.false;
-    expect(isNumberMatcher(new TypeChecker("test"))).to.be.false;
-    expect(isNumberMatcher(new TypeChecker({ test : "test" }))).to.be.false;
-  });
-
-  // Work in progress (Contributions are wellcome)
+  it('should be able to match a number \n');                        // TODO
+  it('should be able to match any \n');                             // TODO
+  it('should be able to match undefined \n');                       // TODO
+  it('should be able to match something truthy \n');                // TODO
+  it('should be able to match something falsy \n');                 // TODO
+  it('should be able to match numbers \n');                         // TODO
+  it('should be able to match booleans \n');                        // TODO
+  it('should be able to match strings \n');                         // TODO
+  it('should be able to match functions \n');                       // TODO
+  it('should be able to match arrays \n');                          // TODO
+  it('should be able to match objects \n');                         // TODO
+  it('should be able to match dates \n');                           // TODO
+  it('should be able to match regular expressions \n');             // TODO
+  it('should be able to match strict equal objects \n');            // TODO
+  it('should be able to match instances of a type \n');             // TODO
+  it('should be able to match an object by its properties \n');     // TODO
+  it('should be able to match an object by its own properties \n'); // TODO
 
 });
