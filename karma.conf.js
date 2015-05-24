@@ -4,9 +4,15 @@ module.exports = function (config) {
   config.set({
       basePath: '',
       frameworks: ['mocha', 'chai', 'sinon'],
-      // Use Chrome for now https://github.com/ariya/phantomjs/issues/12204
-      // browsers: ['PhantomJS'],
-      browsers: ['Chrome', 'Firefox'],
+      browsers: ['PhantomJS'],
+      // browsers: ['PhantomJS','Chrome', 'Firefox'],
+      phantomjsLauncher: {
+        cmd: {
+          linux: __dirname + '/node_modules/phantomjs2/lib/phantom/bin/phantomjs',
+          darwin: __dirname + '/node_modules/phantomjs2/lib/phantom/bin/phantomjs',
+          win32: __dirname + '/node_modules/phantomjs2/lib/phantom/bin/phantomjs'
+        }
+      },
       reporters: ['progress', 'coverage'],
       coverageReporter: {
         type : 'lcov',
@@ -17,8 +23,7 @@ module.exports = function (config) {
         'karma-mocha',
         'karma-chai',
         'karma-sinon',
-        // Use Chrome for now https://github.com/ariya/phantomjs/issues/12204
-        // 'karma-phantomjs-launcher',
+        'karma-phantomjs-launcher-nonet',
         'karma-chrome-launcher',
         'karma-firefox-launcher'
       ],

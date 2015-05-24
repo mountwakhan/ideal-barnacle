@@ -39,7 +39,7 @@ class TypeChecker implements ITypeChecker {
   }
 
   public isBool() : boolean {
-    throw new Error("Not implemented exception");
+    return this.isTypeOf("boolean");
   }
 
   public isNumber() : boolean {

@@ -131,6 +131,19 @@ gulp.task("addheader", function() {
              .pipe(gulp.dest(__dirname + "/dist/"));
 });
 
+
+//******************************************************************************
+//* WATCH
+//******************************************************************************
+gulp.task('watch', function(cb) {
+    gulp.watch([
+      "./source/**/*.ts",
+      "./test/**/*.ts",
+      "karma.conf.js",
+      "package.json",
+    ], ['default'], cb);
+});
+
 //******************************************************************************
 //* DEFAULT
 //******************************************************************************
@@ -138,7 +151,6 @@ gulp.task('default', function(cb){
   runSequence(
     "lint",
     "build-source",
-    //"build-test",
     "browserify-source",
     "browserify-decorators",
     "browserify-call",
