@@ -37,25 +37,25 @@ class Matcher implements IMatcher {
       return tc.isFalsy();
     }
     this.isBool = function(tc : ITypeChecker) {
-      return tc.isFalsy();
+      return tc.isBool();
     }
     this.isString = function(tc : ITypeChecker) {
-      return tc.isFalsy();
+      return tc.isString();
     }
     this.isObject = function(tc : ITypeChecker) {
-      return tc.isFalsy();
+      return tc.isObject();
     }
     this.isFunc = function(tc : ITypeChecker) {
-      return tc.isFalsy();
+      return tc.isFunc();
     }
     this.isArray = function(tc : ITypeChecker) {
-      return tc.isFalsy();
+      return tc.isArray();
     }
     this.isRegexp = function(tc : ITypeChecker) {
-      return tc.isFalsy();
+      return tc.isRegexp();
     }
     this.isDate = function(tc : ITypeChecker) {
-      return tc.isFalsy();
+      return tc.isDate();
     }
   }
 
@@ -67,31 +67,31 @@ class Matcher implements IMatcher {
 
   public isTypeOf(a : string) : (a : ITypeChecker) => boolean {
     return function(tc : ITypeChecker) {
-      return tc.match(a);
+      return tc.isTypeOf(a);
     }
   }
 
   public isSame(a : any) : (a : ITypeChecker) => boolean {
     return function(tc : ITypeChecker) {
-      return tc.match(a);
+      return tc.isSame(a);
     }
   }
 
   public isInstanceOf(a : any) : (a : ITypeChecker) => boolean {
     return function(tc : ITypeChecker) {
-      return tc.match(a);
+      return tc.isInstanceOf(a);
     }
   }
 
   public itHas(property : any) : (a : ITypeChecker) => boolean {
     return function(tc : ITypeChecker) {
-      return tc.match(property);
+      return tc.itHas(property);
     }
   }
 
   public itHasOwn(a : any) : (a : ITypeChecker) => boolean {
     return function(tc : ITypeChecker) {
-      return tc.match(a);
+      return tc.itHasOwn(a);
     }
   }
 }

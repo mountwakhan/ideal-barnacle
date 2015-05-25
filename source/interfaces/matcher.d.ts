@@ -1,7 +1,7 @@
 /// <reference path="./type_checker.d.ts"/>
 
 /*
-* Matchers are used an argument in some of the Spy and Call methods.
+* Matchers are used as argument in some of the Spy and Call methods.
 *
 * someSpy.calledWith(AtSpy.matcher.isNumber);
 * someSpy.calledWith(AtSpy.matcher.isInstanceOf(SomeClass));

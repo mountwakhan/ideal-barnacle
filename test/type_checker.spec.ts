@@ -301,6 +301,11 @@ describe("TypeChecker Class \n", () => {
     expect(new TypeChecker(new Date(1989,1,13,4,3,2)).match(d)).to.equal(false);
     expect(new TypeChecker("date").match(d)).to.equal(false);
 
+    // functions
+    expect(new TypeChecker(function(){ return 5; }).match(function(){ return 5; })).to.equal(true);
+    expect(new TypeChecker(function(){ return 5; }).match(function(){ return 6; })).to.equal(false);
+    expect(new TypeChecker(function a(){ return 5; }).match(function b(){ return 5; })).to.equal(false);
+
     // arrays
     expect(new TypeChecker([1,2,3]).match([1,2,3])).to.equal(true);
     expect(new TypeChecker([1,2,3]).match([1,3,2])).to.equal(false);
