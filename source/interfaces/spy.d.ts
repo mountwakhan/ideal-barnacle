@@ -46,16 +46,12 @@ interface ISpy {
   // The n call
   getCall(n: number): ICall;
 
-  // Returns true if the spy was called before anotherSpy
-  // NOTE based on SinonJS not sure aboit being able to do this with the
-  // decorator approach. Maybe we can store the performance now() API ?
-  // http://updates.html5rocks.com/2012/08/When-milliseconds-are-not-enough-performance-now
+  // Returns true if the function being observed was called
+  // before anotherSpy another function being observed
   calledBefore(anotherSpy): boolean;
 
-  // Returns true if the spy was called after anotherSpy
-  // NOTE based on SinonJS not sure aboit being able to do this with the
-  // decorator approach. Maybe we can store the performance now() API ?
-  // http://updates.html5rocks.com/2012/08/When-milliseconds-are-not-enough-performance-now
+  // Returns true if the function being observed was called
+  // after anotherSpy another function being observed
   calledAfter(anotherSpy): boolean;
 
   //  Returns true if the spy was called at least once with obj as this.

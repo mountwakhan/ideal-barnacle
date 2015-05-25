@@ -22,4 +22,5 @@ describe("Spy Class \n", () => {
   it('should be able to return the details of the third call \n');      // TODO
   it('should be able to return the details of the last call \n');       // TODO
   it('should be able to return the details of a call by its index \n'); // TODO
+  
 });
