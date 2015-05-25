@@ -15,7 +15,77 @@ class TypeChecker implements ITypeChecker {
   }
 
   public match(obj : any) : boolean {
-    throw new Error("Not implemented exception");
+
+    var tc = new TypeChecker(obj);
+    var vtc = new TypeChecker(this._value);
+
+    // stirct equal is used for number, bool, string, null & undefined
+    if(tc.isNumber()) {
+      if(vtc.isNumber() === false) return false;
+      return this._value === obj;
+    }
+    else if(tc.isBool()) {
+      if(vtc.isBool() === false) return false;
+      return this._value === obj;
+    }
+    else if(tc.isString()) {
+      if(vtc.isString() === false) return false;
+      return this._value === obj;
+    }
+    else if(!tc.isDefined()) {
+      if(!vtc.isDefined() === false) return false;
+      return this._value === obj;
+    }
+    // toString() is used for func
+    else if(tc.isFunc()) {
+      if(vtc.isFunc() === false) return false;
+      return this._value.toString() === obj.toString();
+    }
+    // regexp
+    else if(tc.isRegexp()) {
+      if(vtc.isRegexp() === false) return false;
+      return (this._value.source === obj.source) &&
+             (this._value.global === obj.global) &&
+             (this._value.ignoreCase === obj.ignoreCase) &&
+             (this._value.multiline === obj.multiline);
+    }
+    // valueOf is used for date
+    else if(tc.isDate()) {
+      if(vtc.isDate() === false) return false;
+      return this._value.valueOf() === obj.valueOf();
+    }
+    else if(tc.isArray()) {
+      if(vtc.isArray() === false) return false;
+      // length of arrays is taken into account
+      if(this._value.length !== obj.length) {
+        return false;
+      }
+      // order of items in array is taken into account
+      for(var i = 0; i < this._value.length; i++) {
+        if(new TypeChecker(this._value[i]).match(obj[i]) === false) {
+          return false;
+        }
+      }
+      return true;
+    }
+    else {
+      // deep equal
+      var prop, aLength = 0, bLength = 0;
+      for (prop in this._value) {
+          aLength += 1;
+          if (!(prop in obj)) {
+              return false;
+          }
+          var pTc = new TypeChecker(this._value[prop]);
+          if (!pTc.match(obj[prop])) {
+              return false;
+          }
+      }
+      for (prop in obj) {
+          bLength += 1;
+      }
+      return aLength == bLength;
+    }
   }
 
   public isAny() : boolean {

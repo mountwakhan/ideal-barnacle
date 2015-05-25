@@ -18,16 +18,21 @@ describe("Call Class \n", () => {
       expect(fCall.args[i]).to.equals(expect[i]);
     }
 
+    expect(fCall.highResTimeStamp).to.be.a('number');
     expect(fCall.thisValue.value()).to.be.a('object');
     expect(fCall.thisValue.value().test).to.equals(value.test);
-
     expect(fCall.calledWithNew).to.be.a('boolean');
     expect(fCall.calledWithNew).to.equals(false);
-
     expect(fCall.exception).to.equals(undefined);
     expect(fCall.returnValue).to.equals(undefined);
   });
 
-  // Work in progress (Contributions are wellcome)
+  it('should know if it was invoked by the value of this \n');             // TODO
+  it('should know if it was invoked with some arguments \n');              // TODO
+  it('should know if it was invoked with some exact arguments \n');        // TODO
+  it('should know if it was NOT invoked with some arguments \n');          // TODO
+  it('should know if it was invoked with some matching arguments \n');     // TODO
+  it('should know if it was NOT invoked with some matching arguments \n'); // TODO
+  it('should know if it throw an exception when it was invoked \n');       // TODO
 
 });

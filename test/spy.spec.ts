@@ -13,6 +13,13 @@ describe("Spy Class \n", () => {
     expect(spy.getCalls().length).to.equals(0);
   });
 
-  // Work in progress (Contributions are wellcome)
-
+  it('should know if a function was invoked \n');                       // TODO
+  it('should know if a function was invoked 2 times \n');               // TODO
+  it('should know if a function was invoked 3 times \n');               // TODO
+  it('should know how many times a function was invoked \n');           // TODO
+  it('should be able to return the details of the firt call \n');       // TODO
+  it('should be able to return the details of the second call \n');     // TODO
+  it('should be able to return the details of the third call \n');      // TODO
+  it('should be able to return the details of the last call \n');       // TODO
+  it('should be able to return the details of a call by its index \n'); // TODO
 });

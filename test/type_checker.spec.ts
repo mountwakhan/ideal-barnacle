@@ -263,8 +263,78 @@ describe("TypeChecker Class \n", () => {
     expect(new TypeChecker(test).itHas("test")).to.equal(true);
   });
 
-  // TODO
-  it('should be able to match primitive types \n');
-  it('should be able to match complex types \n');
+  it('should be able to match basic types \n', () => {
+
+    // numbers
+    expect(new TypeChecker(1).match(1)).to.equal(true);
+    expect(new TypeChecker(1).match("1")).to.equal(false);
+    expect(new TypeChecker(1).match(2)).to.equal(false);
+    expect(new TypeChecker(1).match(new Date())).to.equal(false);
+
+    // booleans
+    expect(new TypeChecker(true).match(true)).to.equal(true);
+    expect(new TypeChecker(true).match("true")).to.equal(false);
+    expect(new TypeChecker(true).match(false)).to.equal(false);
+    expect(new TypeChecker(true).match(function(){})).to.equal(false);
+
+    // strings
+    expect(new TypeChecker("test").match("test")).to.equal(true);
+    expect(new TypeChecker("test").match("test ")).to.equal(false);
+    expect(new TypeChecker("test").match(false)).to.equal(false);
+    expect(new TypeChecker("test").match(function(){})).to.equal(false);
+
+    // null & undefined
+    expect(new TypeChecker(null).match(null)).to.equal(true);
+    expect(new TypeChecker(undefined).match(undefined)).to.equal(true);
+    expect(new TypeChecker(null).match(undefined)).to.equal(false);
+    expect(new TypeChecker(null).match(function(){})).to.equal(false);
+
+    // regexp
+    expect(new TypeChecker(new RegExp('ab+c', 'i')).match(new RegExp('ab+c', 'i'))).to.equal(true);
+    expect(new TypeChecker(new RegExp('ab+c', 'i')).match(new RegExp('aa+c', 'i'))).to.equal(false);
+    expect(new TypeChecker(1).match(new RegExp('ab+c', 'i'))).to.equal(false);
+    expect(new TypeChecker("test").match(new RegExp('ab+c', 'i'))).to.equal(false);
+
+    // dates
+    var d = new Date(1989,1,13,4,3,1);
+    expect(new TypeChecker(d).match(d)).to.equal(true);
+    expect(new TypeChecker(new Date(1989,1,13,4,3,2)).match(d)).to.equal(false);
+    expect(new TypeChecker("date").match(d)).to.equal(false);
+
+    // arrays
+    expect(new TypeChecker([1,2,3]).match([1,2,3])).to.equal(true);
+    expect(new TypeChecker([1,2,3]).match([1,3,2])).to.equal(false);
+    expect(new TypeChecker("[1,2,3]").match([1,3,2])).to.equal(false);
+    expect(new TypeChecker(true).match([1,3,2])).to.equal(false);
+  });
+
+  it('should be able to match complex types \n', () => {
+    var c1 = new Calculator();
+    var c2 = new Calculator();
+    var cc1 = new ScientificCalculator();
+    var cc2 = new ScientificCalculator();
+    var cc3 = new ScientificCalculator();
+    (<any>cc3).PI = 3.141516;
+
+    // objects
+    expect(new TypeChecker(c1).match(c1)).to.equal(true);
+    expect(new TypeChecker(c2).match(c1)).to.equal(true);
+    expect(new TypeChecker(c2).match(cc1)).to.equal(false);
+
+    // objects with inheritance
+    expect(new TypeChecker(cc1).match(cc1)).to.equal(true);
+    expect(new TypeChecker(cc1).match(cc2)).to.equal(true);
+    expect(new TypeChecker(cc2).match(cc3)).to.equal(false);
+
+    // arrays with objects
+    var a1 = [c1,cc1,cc3];
+    var a2 = [c1,cc1,cc3];
+    var a3 = [c1,cc3,cc1];
+    var a4 = [c1,c2,cc2];
+    expect(new TypeChecker(a1).match(a1)).to.equal(true);
+    expect(new TypeChecker(a1).match(a2)).to.equal(true);
+    expect(new TypeChecker(a1).match(a3)).to.equal(false);
+    expect(new TypeChecker(a1).match(a4)).to.equal(false);
+  });
 
 });
