@@ -50,22 +50,34 @@ function spyClassDecorator(target: any) {
   function addSpy(proto, key) {
     var descriptor = Object.getOwnPropertyDescriptor(proto, key);
     if (descriptor) {
+
+      // search in object's own property
       if (typeof descriptor.value === "function") {
+
+        // decorate methods
         Object.defineProperty(target.prototype, key,
           __decorate([
             spyMethodDecorator
           ], target.prototype, key, descriptor));
       }
       else {
-        // TODO property decorator
+
+        // decorate properties
+        // TODO
       }
     }
     else {
+
+      // search in object's prototype chain
       addSpy(Object.getPrototypeOf(proto), key);
     }
   }
   var proto = target.prototype;
+
+  // iterate object properties
   for (var key in proto) {
+
+    // avoid decorating "cosntructor" method
     if (proto[key] !== target) {
       addSpy(proto, key);
     }

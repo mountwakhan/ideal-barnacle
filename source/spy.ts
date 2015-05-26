@@ -15,10 +15,6 @@ class Spy implements ISpy {
     return this.calls;
   }
 
-  public withArgs(...args: any[]): boolean {
-    throw new Error("Not implemented exception");
-  }
-
   public callCount(): number {
     return this.calls.length;
   }
@@ -40,44 +36,53 @@ class Spy implements ISpy {
   }
 
   public firstCall(): ICall {
-    return (this.calls.length > 1) ? this.calls[0] : null;
+    return this.getCall(1);
   }
 
   public secondCall(): ICall {
-    return (this.calls.length > 1) ? this.calls[1] : null;
+    return this.getCall(2);
   }
 
   public thirdCall(): ICall {
-    return (this.calls.length > 1) ? this.calls[2] : null;
+    return this.getCall(3);
   }
 
   public lastCall(): ICall {
-    return this.calls[this.calls.length - 1];
+    return this.getCall(this.calls.length);
   }
 
   public getCall(n: number): ICall {
     return (this.calls.length >= n) ? this.calls[n - 1] : null;
   }
 
-  // NOTE based on SinonJS not sure aboit being able to do this with the
-  // decorator approach. Maybe we can store the performance now() API ?
-  // http://updates.html5rocks.com/2012/08/When-milliseconds-are-not-enough-performance-now
+  public calledOn(obj): boolean {
+    for(var i = 0; i < this.calls.length; i++) {
+      if(this.calls[i].thisValue.match(obj)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public alwaysCalledOn(obj): boolean {
+    var count = 0;
+    for(var i = 0; i < this.calls.length; i++) {
+      if(this.calls[i].thisValue.match(obj)) {
+        count = count + 1;
+      }
+    }
+    return (count === this.calls.length);
+  }
+
   public calledBefore(anotherSpy): boolean {
     throw new Error("Not implemented exception");
   }
 
-  // NOTE based on SinonJS not sure aboit being able to do this with the
-  // decorator approach. Maybe we can store the performance now() API ?
-  // http://updates.html5rocks.com/2012/08/When-milliseconds-are-not-enough-performance-now
   public calledAfter(anotherSpy): boolean {
     throw new Error("Not implemented exception");
   }
 
-  public calledOn(obj): boolean {
-    throw new Error("Not implemented exception");
-  }
-
-  public alwaysCalledOn(obj): boolean {
+  public withArgs(...args: any[]): boolean {
     throw new Error("Not implemented exception");
   }
 
@@ -126,11 +131,22 @@ class Spy implements ISpy {
   }
 
   public returned(obj: any): boolean {
-    throw new Error("Not implemented exception");
+    for(var i = 0; i < this.calls.length; i++) {
+      if(this.calls[i].returnValue.match(obj)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   public alwaysReturned(obj: any): boolean {
-    throw new Error("Not implemented exception");
+    var count = 0;
+    for(var i = 0; i < this.calls.length; i++) {
+      if(this.calls[i].returnValue.match(obj)) {
+        count = count + 1;
+      }
+    }
+    return (count === this.calls.length);
   }
 
   public reset(): void {
