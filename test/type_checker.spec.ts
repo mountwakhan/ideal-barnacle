@@ -331,7 +331,7 @@ describe("TypeChecker Class \n", () => {
     expect(new TypeChecker(cc1).match(cc2)).to.equal(true);
     expect(new TypeChecker(cc2).match(cc3)).to.equal(false);
 
-    // arrays with objects
+    // arrays of objects
     var a1 = [c1,cc1,cc3];
     var a2 = [c1,cc1,cc3];
     var a3 = [c1,cc3,cc1];
@@ -341,5 +341,4 @@ describe("TypeChecker Class \n", () => {
     expect(new TypeChecker(a1).match(a3)).to.equal(false);
     expect(new TypeChecker(a1).match(a4)).to.equal(false);
   });
-
 });

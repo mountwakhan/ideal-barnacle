@@ -85,9 +85,23 @@ function spyClassDecorator(target: any) {
   return target;
 }
 
+// property decorator
+function spyPropertyDecorator() {
+  throw new Error("Not implemented exception");
+}
+
+// parameter decorator
+function spyParameterDecorator() {
+  throw new Error("Not implemented exception");
+}
+
+// TODO wrap all decorators into an universal decorator
+
 var decorators = {
   class : spyClassDecorator,
-  method : spyMethodDecorator
+  method : spyMethodDecorator,
+  property : spyPropertyDecorator,
+  parameter : spyParameterDecorator
 };
 
 export = decorators;
