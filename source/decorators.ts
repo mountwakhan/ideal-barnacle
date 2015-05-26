@@ -47,30 +47,30 @@ function spyMethodDecorator(target: any, key: string, descriptor: any) {
 function spyClassDecorator(target: any) {
 
   // invoked once of each property in class being decorated
-	function addSpy(proto, key) {
-		var descriptor = Object.getOwnPropertyDescriptor(proto, key);
-		if (descriptor) {
-			if (typeof descriptor.value === "function") {
-				Object.defineProperty(target.prototype, key,
-					__decorate([
-						spyMethodDecorator
-					], target.prototype, key, descriptor));
-			}
-			else {
-				// TODO property decorator
-			}
-		}
-		else {
-			addSpy(Object.getPrototypeOf(proto), key);
-		}
-	}
-	var proto = target.prototype;
-	for (var key in proto) {
-		if (proto[key] !== target) {
-			addSpy(proto, key);
-		}
-	}
-	return target;
+  function addSpy(proto, key) {
+    var descriptor = Object.getOwnPropertyDescriptor(proto, key);
+    if (descriptor) {
+      if (typeof descriptor.value === "function") {
+        Object.defineProperty(target.prototype, key,
+          __decorate([
+            spyMethodDecorator
+          ], target.prototype, key, descriptor));
+      }
+      else {
+        // TODO property decorator
+      }
+    }
+    else {
+      addSpy(Object.getPrototypeOf(proto), key);
+    }
+  }
+  var proto = target.prototype;
+  for (var key in proto) {
+    if (proto[key] !== target) {
+      addSpy(proto, key);
+    }
+  }
+  return target;
 }
 
 var decorators = {
