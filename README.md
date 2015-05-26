@@ -2,6 +2,8 @@
 
 [![Join the chat at https://gitter.im/AtSpy/AtSpy](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/AtSpy/AtSpy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![build](https://travis-ci.org/AtSpy/AtSpy.svg)](https://travis-ci.org/AtSpy/AtSpy)
+[![dependencies](https://david-dm.org/AtSpy/AtSpy.svg)](https://david-dm.org/AtSpy/AtSpy#info=dependencies)
+[![dev dependencies](https://david-dm.org/AtSpy/AtSpy/dev-status.svg)](https://david-dm.org/AtSpy/AtSpy#info=devDependencies)
 
 ## Standalone test spies for JavaScript powered by [TypeScript](http://www.typescriptlang.org/) & [Decorators (ES7)](https://github.com/wycats/javascript-decorators). No dependencies, works with any unit testing framework.
 
