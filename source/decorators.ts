@@ -2,6 +2,8 @@
 /// <reference path="./interfaces/call.d.ts"/>
 /// <reference path="./interfaces/type_checker.d.ts"/>
 
+declare function __decorate(decorators, target, key, desc);
+
 import Spy = require("./spy");
 import Call = require("./call");
 import TypeChecker = require("./type_checker");
@@ -32,6 +34,7 @@ function spyMethodDecorator(target: any, key: string, descriptor: any) {
     }
     catch (e) {
       call.exception = e;
+      call.returnValue = new TypeChecker(undefined);
       target.spies[key].calls.push(call);
       throw e;
     }
@@ -41,10 +44,33 @@ function spyMethodDecorator(target: any, key: string, descriptor: any) {
 }
 
 // class decorator
-function spyClassDecorator() {
-  return function (target: Function) {
-    throw new Error("Not implemented exception");
-  }
+function spyClassDecorator(target: any) {
+
+  // invoked once of each property in class being decorated
+	function addSpy(proto, key) {
+		var descriptor = Object.getOwnPropertyDescriptor(proto, key);
+		if (descriptor) {
+			if (typeof descriptor.value === "function") {
+				Object.defineProperty(target.prototype, key,
+					__decorate([
+						spyMethodDecorator
+					], target.prototype, key, descriptor));
+			}
+			else {
+				// TODO property decorator
+			}
+		}
+		else {
+			addSpy(Object.getPrototypeOf(proto), key);
+		}
+	}
+	var proto = target.prototype;
+	for (var key in proto) {
+		if (proto[key] !== target) {
+			addSpy(proto, key);
+		}
+	}
+	return target;
 }
 
 var decorators = {
