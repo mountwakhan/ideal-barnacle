@@ -39,8 +39,8 @@ class Call implements ICall {
     if (l > this.args.length) {
         return false;
     }
-    for (var i = 0; i < l; i += 1) {
-        if (!this.args[i].match(arguments[i])) {
+    for (var i = 0; i < l; i++) {
+        if (this.args[i].match(arguments[i]) === false) {
             return false;
         }
     }
@@ -49,11 +49,11 @@ class Call implements ICall {
 
   public calledWithExactly(...args: any[]): boolean {
     return arguments.length == this.args.length &&
-           this.calledWith.apply(this, arguments);
+           this.calledWith(...args);
   }
 
   public notCalledWith(...args: any[]): boolean {
-    return !this.calledWith(args);
+    return !this.calledWith(...args);
   }
 
   public calledWithMatch(...args : ((tc : ITypeChecker) => boolean)[]) : boolean {
@@ -61,7 +61,7 @@ class Call implements ICall {
     if (l > this.args.length) {
         return false;
     }
-    for (var i = 0; i < l; i += 1) {
+    for (var i = 0; i < l; i++) {
         var comparer = args[i];
         if (!comparer(this.args[i])) {
             return false;
@@ -75,10 +75,8 @@ class Call implements ICall {
   }
 
   public threw(error?: any): boolean {
-    if (this.exception.isDefined()) {
-        return !!this.exception;
-    }
-    return this.exception.value() === error || this.exception.value().name === error;
+    if (typeof this.exception === "undefined") { return false; }
+    return this.exception.value && this.exception.value().toString() === error.toString();
   }
 }
 

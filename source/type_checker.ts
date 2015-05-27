@@ -39,7 +39,7 @@ class TypeChecker implements ITypeChecker {
     // toString() is used for func
     else if(tc.isFunc()) {
       if(vtc.isFunc() === false) return false;
-      return this._value.toString() === obj.toString();
+      return this._value.toString() == obj.toString();
     }
     // regexp
     else if(tc.isRegexp()) {

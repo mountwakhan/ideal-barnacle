@@ -28,7 +28,9 @@ module.exports = function (config) {
         'karma-firefox-launcher'
       ],
       preprocessors: {
-        '**/bundled/test/*.spec.js' : 'coverage'
+        // './bundle/test/*.spec.js' : 'coverage'
+        // code coverage causes broken build see
+        // http://stackoverflow.com/questions/30470796/
       },
       files : [
         { pattern: __dirname + "/bundle/test/*.spec.js", included: true }
