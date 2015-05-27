@@ -15,12 +15,8 @@ class Call implements ICall {
   public calledWithNew : boolean;
 
   constructor(thisValue: any, calledWithNew : boolean, args: any[]) {
-    if(typeof performance === "undefined" && typeof performance.now === "function") {
+    if(typeof performance !== "undefined" && typeof performance.now === "function") {
       this.highResTimeStamp =  performance.now();
-    }
-    else {
-      // performance.now() fallback
-      this.highResTimeStamp = new Date().getTime();
     }
     this.thisValue = new TypeChecker(thisValue);
     this.calledWithNew = calledWithNew;
@@ -76,6 +72,7 @@ class Call implements ICall {
 
   public threw(error?: any): boolean {
     if (typeof this.exception === "undefined") { return false; }
+    if(typeof error === "undefined") { return true; }
     return this.exception.value && this.exception.value().toString() === error.toString();
   }
 }

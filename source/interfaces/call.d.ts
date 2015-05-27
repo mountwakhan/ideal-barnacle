@@ -9,6 +9,7 @@
 * responsibility  is in hands of the decorators.
 */
 interface ICall {
+  highResTimeStamp : number;
   thisValue: ITypeChecker;
   args: ITypeChecker[];
   returnValue: ITypeChecker;

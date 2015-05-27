@@ -48,11 +48,11 @@ interface ISpy {
 
   // Returns true if the function being observed was called
   // before anotherSpy another function being observed
-  calledBefore(anotherSpy): boolean;
+  calledBefore(anotherSpy : ISpy): boolean;
 
   // Returns true if the function being observed was called
   // after anotherSpy another function being observed
-  calledAfter(anotherSpy): boolean;
+  calledAfter(anotherSpy : ISpy): boolean;
 
   //  Returns true if the spy was called at least once with obj as this.
   calledOn(obj): boolean;
@@ -73,19 +73,19 @@ interface ISpy {
   alwaysCalledWithExactly(...args: any[]): boolean;
 
   // Returns true if spy was called with matching arguments (and possibly others).
-  calledWithMatch(...args: any[]): boolean;
+  calledWithMatch(...args: ((tc : ITypeChecker) => boolean)[]): boolean;
 
   // Returns true if spy was always called with matching arguments (and possibly others).
-  alwaysCalledWithMatch(...args: any[]): boolean;
+  alwaysCalledWithMatch(...args: ((tc : ITypeChecker) => boolean)[]): boolean;
 
-  // Returns true if spy was called the new operator.
+  // Returns true if spy was called with the new operator.
   calledWithNew(): boolean;
 
-  // Returns true if the spy/stub was never called with the provided arguments.
+  // Returns true if the spy was never called with the provided arguments.
   neverCalledWith(...args: any[]): boolean;
 
-  // Returns true if the spy/stub was never called with matching arguments.
-  neverCalledWithMatch(...args: any[]): boolean;
+  // Returns true if the spy was never called with matching arguments.
+  neverCalledWithMatch(...args: ((tc : ITypeChecker) => boolean)[]): boolean;
 
   // Returns true if spy threw an exception or  an exception of the provided type at least once.
   threw(obj?: any): boolean;

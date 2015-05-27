@@ -52,7 +52,8 @@ class Spy implements ISpy {
   }
 
   public getCall(n: number): ICall {
-    return (this.calls.length >= n) ? this.calls[n - 1] : null;
+    var l = this.calls.length;
+    return (l !== 0 &&  l >= n) ? this.calls[n - 1] : null;
   }
 
   public calledOn(obj): boolean {
@@ -74,60 +75,134 @@ class Spy implements ISpy {
     return (count === this.calls.length);
   }
 
-  public calledBefore(anotherSpy): boolean {
-    throw new Error("Not implemented exception");
+  public calledBefore(anotherSpy : ISpy) : boolean {
+
+    if(typeof performance === "undefined" || typeof performance.now !== "function") {
+      var e = "This feature is only available in enviroments with performance timing API support.";
+      throw new Error(e);
+    }
+
+    var l  = this.calls.length,
+        c = anotherSpy.getCalls(),
+        l2 = c.length,
+        max1 = 0, max2 = 0;
+
+    for(var i = 0; i < l; i++) {
+      var val = this.calls[i].highResTimeStamp;
+      if(val > max1) {
+        max1 = val;
+      }
+    }
+
+    for(var j = 0; j < l2; j++) {
+      var val = c[j].highResTimeStamp;
+      if(val > max2) {
+        max2 = val;
+      }
+    }
+
+    return (max1 > max2);
   }
 
-  public calledAfter(anotherSpy): boolean {
-    throw new Error("Not implemented exception");
-  }
-
-  public withArgs(...args: any[]): boolean {
-    throw new Error("Not implemented exception");
+  public calledAfter(anotherSpy : ISpy): boolean {
+    return !this.calledBefore(anotherSpy);
   }
 
   public calledWith(...args: any[]): boolean {
-    throw new Error("Not implemented exception");
+    for(var i = 0; i < this.calls.length; i++) {
+      if(this.calls[i].calledWith(...args)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   public alwaysCalledWith(...args: any[]): boolean {
-    throw new Error("Not implemented exception");
+    var l = this.calls.length;
+    var calledWithCount = 0;
+    for(var i = 0; i < l; i++) {
+      if(this.calls[i].calledWith(...args)) {
+        calledWithCount++;
+      }
+    }
+    return (calledWithCount === l);
   }
 
   public calledWithExactly(...args: any[]): boolean {
-    throw new Error("Not implemented exception");
+    for(var i = 0; i < this.calls.length; i++) {
+      if(this.calls[i].calledWithExactly(...args)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   public alwaysCalledWithExactly(...args: any[]): boolean {
-    throw new Error("Not implemented exception");
+    var l = this.calls.length;
+    var calledWithExactlyCount = 0;
+    for(var i = 0; i < l; i++) {
+      if(this.calls[i].calledWithExactly(...args)) {
+        calledWithExactlyCount++;
+      }
+    }
+    return (calledWithExactlyCount === l);
   }
 
   public calledWithMatch(...args: any[]): boolean {
-    throw new Error("Not implemented exception");
+    for(var i = 0; i < this.calls.length; i++) {
+      if(this.calls[i].calledWithMatch(...args)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   public alwaysCalledWithMatch(...args: any[]): boolean {
-    throw new Error("Not implemented exception");
+    var l = this.calls.length;
+    var calledWithMatchCount = 0;
+    for(var i = 0; i < l; i++) {
+      if(this.calls[i].calledWithMatch(...args)) {
+        calledWithMatchCount++;
+      }
+    }
+    return (calledWithMatchCount === l);
   }
 
   public calledWithNew(): boolean {
-    throw new Error("Not implemented exception");
+    for(var i = 0; i < this.calls.length; i++) {
+      if(this.calls[i].calledWithNew === true) {
+        return true;
+      }
+    }
+    return false;
   }
 
   public neverCalledWith(...args: any[]): boolean {
-    throw new Error("Not implemented exception");
+    return !this.calledWith(...args);
   }
 
-  public neverCalledWithMatch(...args: any[]): boolean {
-    throw new Error("Not implemented exception");
+  public neverCalledWithMatch(...args: ((tc : ITypeChecker) => boolean)[]): boolean {
+    return !this.calledWithMatch(...args);
   }
 
   public threw(obj?: any): boolean {
-    throw new Error("Not implemented exception");
+    for(var i = 0; i < this.calls.length; i++) {
+      if(this.calls[i].threw(obj)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   public alwaysThrew(obj?: any): boolean {
-    throw new Error("Not implemented exception");
+    var l = this.calls.length;
+    var threwCount = 0;
+    for(var i = 0; i < l; i++) {
+      if(this.calls[i].threw(obj)) {
+        threwCount++;
+      }
+    }
+    return (threwCount === l);
   }
 
   public returned(obj: any): boolean {

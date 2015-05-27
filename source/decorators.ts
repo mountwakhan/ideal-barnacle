@@ -2,11 +2,41 @@
 /// <reference path="./interfaces/call.d.ts"/>
 /// <reference path="./interfaces/type_checker.d.ts"/>
 
-declare function __decorate(decorators, target, key, desc);
+declare var Reflect;
 
 import Spy = require("./spy");
 import Call = require("./call");
 import TypeChecker = require("./type_checker");
+
+// The __decorate is provided by the TypeScript compiler when @ is present in
+// the code. We will include this function manually in order to allow developers
+// to use the library even if they are not using TypeScript.
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+
+    // Reflection metadata API
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") {
+      return Reflect.decorate(decorators, target, key, desc);
+    }
+
+    // fallback
+    switch (arguments.length) {
+
+        // class
+        case 2: return decorators.reduceRight(function(o, d) {
+                  return (d && d(o)) || o;
+                }, target);
+
+        // ??
+        case 3: return decorators.reduceRight(function(o, d) {
+                  return (d && d(target, key)), void 0;
+                }, void 0);
+
+        // methods
+        case 4: return decorators.reduceRight(function(o, d) {
+                  return (d && d(target, key, o)) || o;
+                }, desc);
+    }
+};
 
 // method decorator
 function spyMethodDecorator(target: any, key: string, descriptor: any) {
@@ -86,18 +116,34 @@ function spyClassDecorator(target: any) {
 }
 
 // property decorator
-function spyPropertyDecorator() {
+function spyPropertyDecorator(target: any, key : string) {
   throw new Error("Not implemented exception");
 }
 
 // parameter decorator
-function spyParameterDecorator() {
+function spyParameterDecorator(target: any, key : string, index : number) {
   throw new Error("Not implemented exception");
 }
 
-// TODO wrap all decorators into an universal decorator
+// A wrapper to abstract developers from concrete decorator types
+function universalSpyDecorator(...args : any[]) {
+  switch(args.length) {
+    case 1:
+      return spyClassDecorator.apply(this, args);
+    case 2:
+      return spyPropertyDecorator.apply(this, args);
+    case 3:
+      if(typeof args[2] === "number") {
+        return spyParameterDecorator.apply(this, args);
+      }
+      return spyMethodDecorator.apply(this, args);
+    default:
+      throw new Error("Invalid operation excepion");
+  }
+}
 
 var decorators = {
+  universal : universalSpyDecorator,
   class : spyClassDecorator,
   method : spyMethodDecorator,
   property : spyPropertyDecorator,
