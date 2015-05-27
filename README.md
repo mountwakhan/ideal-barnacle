@@ -113,8 +113,8 @@ There are a good few not implemented methods at:
 - [/source/call.ts](https://github.com/remojansen/typescript-spy-decorator/tree/master/source/call.ts)
 
 If you are going to contribute check interfaces for implementation details:
-- [ISpy](https://github.com/remojansen/typescript-spy-decorator/tree/master/source/spy.d.ts)
-- [ICall](https://github.com/remojansen/typescript-spy-decorator/tree/master/source/call.d.ts)
+- [ISpy](https://github.com/remojansen/typescript-spy-decorator/tree/master/source/interfaces/spy.d.ts)
+- [ICall](https://github.com/remojansen/typescript-spy-decorator/tree/master/source/interfaces/call.d.ts)
 
 Check out the [issues](https://github.com/AtSpy/typescript-spy-decorator/issues) and use the [chat](https://gitter.im/AtSpy/typescript-spy-decorator) to find a way to collaborate.
 
