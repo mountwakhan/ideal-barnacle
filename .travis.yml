@@ -6,5 +6,3 @@ before_install:
   - sudo mv phantomjs /usr/local/phantomjs/bin/phantomjs
 node_js:
   - "0.12"
-script:
-  - npm run ci
